@@ -22,6 +22,7 @@ namespace EatCleanAPI.Models
         public virtual DbSet<AppRole> AppRoles { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<CustomerSentiment> CustomerSentiments { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<MenuDetail> MenuDetails { get; set; }
@@ -49,7 +50,7 @@ namespace EatCleanAPI.Models
 
                 entity.Property(e => e.Description).HasMaxLength(50);
 
-                entity.Property(e => e.Name).HasMaxLength(20);
+                entity.Property(e => e.Name).HasMaxLength(30);
             });
 
             modelBuilder.Entity<Category>(entity =>
@@ -78,6 +79,31 @@ namespace EatCleanAPI.Models
                 entity.Property(e => e.Password).HasMaxLength(15);
 
                 entity.Property(e => e.Phone).HasMaxLength(10);
+            });
+
+            modelBuilder.Entity<CustomerSentiment>(entity =>
+            {
+                entity.ToTable("CustomerSentiment");
+
+                entity.Property(e => e.FoodComment).HasMaxLength(30);
+
+                entity.Property(e => e.FoodPredict)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ServiceComment).HasMaxLength(30);
+
+                entity.Property(e => e.ServicePredict)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserName).HasMaxLength(30);
+
+                entity.Property(e => e.VegaComment).HasMaxLength(30);
+
+                entity.Property(e => e.VegaPredict)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Employee>(entity =>
@@ -127,7 +153,7 @@ namespace EatCleanAPI.Models
             modelBuilder.Entity<MenuDetail>(entity =>
             {
                 entity.HasKey(e => new { e.ProductId, e.MenuId })
-                    .HasName("PK__Menu Det__A8952BC8429A18C5");
+                    .HasName("PK__Menu Det__A8952BC885DC7C0A");
 
                 entity.ToTable("Menu Details");
 
@@ -192,7 +218,7 @@ namespace EatCleanAPI.Models
             modelBuilder.Entity<OrderDetail>(entity =>
             {
                 entity.HasKey(e => new { e.OrderId, e.MenuId })
-                    .HasName("PK__Order De__DF09B68A246067F2");
+                    .HasName("PK__Order De__DF09B68AE59083DE");
 
                 entity.ToTable("Order Details");
 
@@ -267,7 +293,7 @@ namespace EatCleanAPI.Models
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.RefreshTokens)
                     .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK__RefreshTo__custo__06CD04F7");
+                    .HasConstraintName("FK__RefreshTo__custo__5535A963");
             });
 
             modelBuilder.Entity<RefreshTokenEmployee>(entity =>
@@ -293,7 +319,7 @@ namespace EatCleanAPI.Models
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.RefreshTokenEmployees)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__RefreshTo__emplo__09A971A2");
+                    .HasConstraintName("FK__RefreshTo__emplo__5629CD9C");
             });
 
             modelBuilder.Entity<Shipper>(entity =>

@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace EatCleanAPI.Models
 {
-    public class EmployeeWithToken:Employee
+    public class EmployeeWithToken : Employee
     {
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
-        public EmployeeWithToken( Employee employee)
+        public EmployeeWithToken(Employee employee)
         {
             this.EmployeeId = employee.EmployeeId;
             this.FirstName = employee.FirstName;
@@ -25,8 +25,6 @@ namespace EatCleanAPI.Models
             this.Gender = employee.Gender;
             this.Notes = employee.Notes;
             this.Password = employee.Password;
-
-
         }
     }
 }

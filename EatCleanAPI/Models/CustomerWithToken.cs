@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EatCleanAPI.Models
 {
-    public class CustomerWithToken: Customer
+    public class CustomerWithToken : Customer
     {
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }

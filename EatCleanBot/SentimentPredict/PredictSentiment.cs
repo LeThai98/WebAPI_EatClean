@@ -10,6 +10,7 @@ namespace EatCleanBot.SentimentPredict
     {
         private string _sentiment;
         public PredictSentiment(string sentiment)
+
         {
             _sentiment = sentiment;
         }
